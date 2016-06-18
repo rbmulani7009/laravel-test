@@ -1,4 +1,20 @@
+<?php
+if (!function_exists('classActivePath')) {
 
+    function classActivePath($path) {
+        $path = explode('.', $path);
+        $segment = 1;
+        foreach ($path as $p) {
+            if ((request()->segment($segment) == $p) == false) {
+                return '';
+            }
+            $segment++;
+        }
+        return ' active';
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -29,13 +45,13 @@
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Laravel Demo</a>
+                    <a class="navbar-brand active" href="#">Laravel Demo</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{ url('/') }}">Dashboard</a></li>
-                        <li><a href="{{ url('/users') }}">Users</a></li>
-                        <li><a href="{{ url('/tasks') }}">Tasks</a></li>
+                        <li class="{!! classActivePath('')  !!}"><a href="{{ url('/') }}">Dashboard</a></li>
+                        <li class="{!! classActivePath('users')  !!}"><a href="{{ url('/users') }}">Users</a></li>
+                        <li class="{!! classActivePath('tasks')  !!}"><a href="{{ url('/tasks') }}">Tasks</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

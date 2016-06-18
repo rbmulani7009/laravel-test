@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\User;
 use App\Task;
 
-class UsersController extends Controller {
+class TasksController extends Controller {
 
     public function __construct() {
         
@@ -19,22 +19,25 @@ class UsersController extends Controller {
      * @return Response
      */
     public function index() {
-        $managers = User::where('type', 'manager')->get();
-        $users = User::where('type', 'user')->get();
+        $tasks = Task::all();
 
-        return view('users.index',  compact('users','managers'));
+        return view('tasks.index', compact('tasks'));
     }
-    
+
     /**
      * Show the application dashboard to the user.
      *
      * @return Response
      */
     public function show($id) {
-        $user = User::findorFail($id);
-        $tasks = Task::where('assignedTo',$id)->get();
+        $task = Task::findorFail($id);
 
-        return view('users.show',  compact('user','tasks'));
+        return view('tasks.show', compact('task'));
+    }
+    
+    public function create() {
+        
+        return view('tasks.create');
     }
 
 }
