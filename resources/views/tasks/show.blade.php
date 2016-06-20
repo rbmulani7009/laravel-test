@@ -8,7 +8,7 @@
     <label>  Type : </label>
     <p>{{ ucfirst($task->taskType) }}</p>
     <label>  Assigned To : </label>
-    <p>{{ $task->user }}</p>
+    <p>{{ $task->user->email }}</p>
 </div>
 
 @stop

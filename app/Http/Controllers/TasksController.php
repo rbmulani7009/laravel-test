@@ -29,7 +29,6 @@ class TasksController extends Controller {
 
     public function show($id) {
         $task = Task::findorFail($id);
-
         return view('tasks.show', compact('task'));
     }
 
