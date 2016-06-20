@@ -37,12 +37,19 @@ if (!function_exists('classActivePath')) {
                 padding: 40px 15px;
                 text-align: center;
             }
+            .nav-color {
+                background-color : {{ Auth::user()->color }};
+                
+            }
+            .navbar-inverse .navbar-nav>li>a{
+                color: #000;
+            } 
         </style>
     </head>
 
     <body>
 
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top nav-color">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand active" href="#">Laravel Demo</a>
@@ -50,8 +57,26 @@ if (!function_exists('classActivePath')) {
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="{!! classActivePath('')  !!}"><a href="{{ url('/') }}">Dashboard</a></li>
+                        @if(Auth::user()->type != 'user')
                         <li class="{!! classActivePath('users')  !!}"><a href="{{ url('/users') }}">Users</a></li>
+                        @endif
                         <li class="{!! classActivePath('tasks')  !!}"><a href="{{ url('/tasks') }}">Tasks</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                        </li>
+                        @endif
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

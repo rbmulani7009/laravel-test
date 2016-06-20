@@ -14,5 +14,11 @@ class Task extends Model {
     protected $fillable = [
         'name', 'description', 'taskType', 'assignedTo',
     ];
-
+    
+    
+    protected function user() {
+        
+        return $this->belongsTo('App\User'); 
+        
+    }
 }

@@ -1,11 +1,14 @@
 @extends('app')
 
 @section('content')
+@if(isset($managers))
 <div class="page-header">
-    <h1>Managers</h1>
+    <h1>Managers <a href="{{ url('/users/create') }}" class="btn btn-sm btn-primary pull-right">Add new User</a></h1>
 </div>
 <div class="row">
     <div class="col-md-12">
+
+
         <table class="table">
             <thead>
                 <tr>
@@ -27,7 +30,10 @@
                     </td>
                     <td>{{ $user->email }}</td>
                     <td>{{ ucfirst($user->type) }}</td>
-                    <td><a href="{{ url('/users',$user->id) }}" class="btn btn-sm btn-primary">View</a></td>
+                    <td>
+                        <a href="{{ url('/users',$user->id) }}" class="btn btn-sm btn-primary">View</a> | 
+                        <a href="{{ url('/users/'.$user->id.'/edit') }}" class="btn btn-sm btn-primary">Edit</a>
+                    </td>
                 </tr>
                 @endforeach
 
@@ -35,7 +41,9 @@
         </table>
     </div>
 </div>
+@endif
 
+@if(isset($users))
 <div class="page-header">
     <h1>Users</h1>
 </div>
@@ -70,5 +78,6 @@
         </table>
     </div>
 </div>
+@endif
 
 @stop

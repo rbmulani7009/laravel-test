@@ -23,4 +23,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    protected function SetPasswordAttribute($password) {
+        
+        $this->attributes['password'] = bcrypt($password); 
+        
+    }
+    
+    protected function tasks() {
+        
+        return $this->hasMany('App\Task'); 
+        
+    }
 }
